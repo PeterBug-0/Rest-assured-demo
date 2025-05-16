@@ -1,5 +1,6 @@
 package com.api.tests;
 
+import com.api.models.reponse.LoginResponse;
 import com.api.models.request.LoginRequest;
 import com.api.services.AuthService;
 import com.sun.net.httpserver.Request;
@@ -17,7 +18,15 @@ public class LoginApiTest {
         LoginRequest loginRequest = new LoginRequest("Deoxygen24", "Lemz1234");
         AuthService authService = new AuthService();
         Response response = authService.login(loginRequest);
-        System.out.println(response.asPrettyString());
+        LoginResponse loginResponse =  response.as(LoginResponse.class);
 
+        System.out.println(response.asPrettyString());
+        System.out.println(loginResponse.getToken());
+        System.out.println(loginResponse.getEmail());
+        System.out.println(loginResponse.getId());
+
+        Assert.assertTrue(loginResponse.getToken() !=null);
+        Assert.assertEquals(loginResponse.getEmail(), "lemzoxy24@gmail.comcd\r\n");
+        Assert.assertEquals(loginResponse.getId(),3);
     }
 }

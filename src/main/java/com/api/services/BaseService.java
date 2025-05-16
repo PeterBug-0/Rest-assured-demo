@@ -20,7 +20,7 @@ public class BaseService { // Wrapper for Rest Assured
         requestSpecification = given().baseUri(BASE_URL);
     }
 
-    protected Response postRequest(LoginRequest payload, String endpoint){
+    protected Response postRequest(Object payload, String endpoint){
         return requestSpecification.contentType(ContentType.JSON).body(payload).post(endpoint);
     }
 }
